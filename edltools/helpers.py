@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from timecode import Timecode
+import re
 
 def importEdlTitle(filepath):
     # Extracts the title from an File129 formatted EDL and returns a string
@@ -14,7 +16,7 @@ def importEdlFcm(filepath):
             if line.startswith("FCM") == True:
                 return line[6:].strip()
 
-def importEdlBody(filepath):
+def importEdlBody(filepath,frameRate):
     # Extracts the body from an File129 formatted EDL and returns a list of dicts
     body = []
     with open(filepath) as file:
@@ -34,6 +36,12 @@ def importEdlBody(filepath):
                 # This section addes clip lines to the EDL body
                 counter = counter + 1
                 clip = line.split()
+                # This section converts timecode to timecode objects
+                i = 0
+                while i < len(clip):
+                    if re.search("[0-9]:[0-9]:[0-9]:[0-9]",clip[i]):
+                        clip[i] = Timecode(frameRate,clip[i])
+                    i +=1
                 body.append({"clip":clip})
             else:
                 # This section adds effect lines to the EDL body
