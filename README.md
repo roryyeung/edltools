@@ -4,6 +4,8 @@ This is a simple set of python tools designed to import a range of EDL (Edit Dec
 
 The reader functions in this package take an EDL (or EDL-like file), and returns an object of class EDL. This object contains a range of methods, to allow the data contained to be manipulated or outputted.
 
+Note that this class assumes a frame rate of 25FPS, unless otherwise specified.
+
 Potential use cases for this package include converting EDLs to Excel, performing file searches for all files contained within an EDL, and providing a bridge between NLE (Non-Linear Editing) software and third-party tools.
 
 ## About EDLs

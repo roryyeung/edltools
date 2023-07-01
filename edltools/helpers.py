@@ -3,27 +3,29 @@ import timecode
 import re
 
 def importEdlTitle(filepath):
-    # Extracts the title from an File129 formatted EDL and returns a string
+    """Helper function - extracts the title from an File129 formatted EDL and returns a string"""
     with open(filepath) as file:
         for line in file.readlines():
             if line.startswith("TITLE") == True:
                 return line[6:].strip()
 
 def importEdlFcm(filepath):
-    # Extracts the title from an File129 formatted EDL and returns a string
+    """Helper function - extracts the title from an File129 formatted EDL and returns a string"""
     with open(filepath) as file:
         for line in file.readlines():
             if line.startswith("FCM") == True:
-                return line[6:].strip()
+                return line[5:].strip()
 
-def importEdlBody(filepath,frameRate):
-    # Extracts the body from an File129 formatted EDL and returns a list of dicts
+def importEdlBody(filepath,frameRate=25):
+    """Helper function - extracts the body from an File129 formatted EDL and returns a list of dicts"""
     body = []
     with open(filepath) as file:
         counter = -1
         for line in file.readlines():
             
             # This section of logic eliminates non-body lines
+            if line.strip() == "":
+                continue
             if line.startswith("TITLE") == True:
                 continue
             if line.startswith("FCM") == True:
@@ -52,8 +54,9 @@ def importEdlBody(filepath,frameRate):
                     body[counter][key] = value
                 else:
                     continue
-
+    return body
 
 def dumpEffects():
+    """Helper function - removes all effects (non-clip) lines from the EDL."""
     # Todo
     pass
