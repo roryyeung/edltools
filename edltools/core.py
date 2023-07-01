@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from . import helpers
+import os
 
 class Edl:
     """
@@ -43,12 +44,11 @@ class Edl:
             body = self.body
         pass
 
-    def listClips(self,stripCopies=False):
+    def listClips(self):
         """
         This method iterates through the body object and generates a list of clip names.
         It ignores all effects and other non-clip items.
         It will raise a valueError should no clip names be found.
-        It has the option to strip copy information - useful for transcodes in Avid.
         """
         # Todo
         pass
@@ -58,7 +58,6 @@ class Edl:
         This method iterates through the body object and generate a list of source files in the EDL.
         It raises a ValueError, should no source file names be found.
         """
-        # Todo
         fileList = []
         for line in self.body:
             source = line.get('SOURCE FILE')
@@ -73,7 +72,7 @@ class Edl:
         return fileList
     
     def dumpEffects(self):
-        pass
+        self.body = helpers.dumpEffects(self.body)
 
 class Ale:
     """
@@ -81,23 +80,53 @@ class Ale:
     """
     #Todo
 
-def edlFileSearchCopy(list,searchpath,destination):
-    # Todo
-    # This function loops across "list" and searches "searchpath" for each file.
-    # If it finds the file, it copies it to "destination"
-    # This logic identifys any common spanned files, and copies the folder instea
-    conventionalFiles = [] # Todo - fill in
-    spannedFiles = [] # Todo - fill in
-    i = 0
-    while i < len(list):
-        if True: # Todo - implament logic to decide if spanned or regular clip
-            pass
-        print(f'Searching file {i + 1} of {len(list) + 1}.')
-        filePath = helpers.fileSearch(list[i],searchpath) # Todo - implement helper function
-        if True: # Todo - implement sucess or failure report - cant find, unsupported file, no file name - continue on failutre - start log file! - helper function - implament checksum?
-            pass 
-        helpers.fileCopy(filePath,destination) # Todo - Implement copy function
-    # Todo - return copy report
+def edlFileSearchCopy(object,searchpath,destination,copy=False):
+    """
+    This function accepts an EDL or ALE object and searches the "searchpath" for each clip in the object.
+    It can either output a list of file paths to the destination or copy each file in the list to the destination.
+    It does not fail if it can't find a file, but instead creates a list of files it can't find.
+    It generates a log for each copy, whilst providing progress updates on the console.
+    Note: this will not follow symbolic links.
+    """
+
+    # TODO - UNTESTED BEYOND THIS POINT ===========================================================================
+
+    # This logic checks the the input object is an ALE or EDL.
+    if isinstance(object,Edl) == False and isinstance(object,Ale) == False:
+        raise TypeError("Object is not an Edl or Ale")
+    # We call the object's list of files
+    fileList = object.listFiles()
+    # Convenienly, the listFiles method will raise a value error if all contained within are of type None.
+    
+    # In this section, we will perform an OS.walk to go through the target drive.
+    # Every time that a filename matches one on the list, it will add the location to our new list.
+    dirList = []
+    for dirpath, dirnames, filenames in os.walk(searchpath):
+        # This case handles non-spanned files
+        for filename in filenames:
+            if filename in fileList or filename in os.path.splitext(filename)[0]:
+                address = os.path.join(dirpath, filename)
+                dirList.append(address)
+        # This case handles spanned files - UNSURE!!!!! ==================================================
+        for dirname in dirnames:
+            if dirname in fileList:
+                address = os.path.join(dirpath, dirname)
+                dirList.append(address)
+    print(f"Search complete, {len(dirList)} files found.")
+            
+
+    ## TODO - implement copy function =======================================================================
+    if copy == True:
+        pass
+        print(f"Copy complete - at path: {destination}.")
+
+    ## TODO - return copy report ==========================================================================
+    reportName = object.title
+    reportPath = os.join(destination,reportName)
+    with open(reportPath, 'w') as fp:
+        for address in dirList:
+            fp.write(address)
+    print(f"Report complete - at path {destination}.")
 
 def edlDupeDetection(var):
     # Todo

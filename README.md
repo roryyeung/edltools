@@ -26,6 +26,12 @@ pip install edltools
 
 NOT YET IMPLEMENTED
 
+## Dependencies
+
+This package requires the following depencencies:
+
+- Timecode
+
 ## Usage
 
 ### EDL Class
