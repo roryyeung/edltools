@@ -54,8 +54,19 @@ def edlFileSearchCopy(list,searchpath,destination):
     # Todo
     # This function loops across "list" and searches "searchpath" for each file.
     # If it finds the file, it copies it to "destination"
-    # This logic identifys any common spanned files, and copies the folder instead
-    pass 
+    # This logic identifys any common spanned files, and copies the folder instea
+    conventionalFiles = [] # Todo - fill in
+    spannedFiles = [] # Todo - fill in
+    i = 0
+    while i < len(list):
+        if True: # Todo - implament logic to decide if spanned or regular clip
+            pass
+        print(f'Searching file {i + 1} of {len(list) + 1}.')
+        filePath = helpers.fileSearch(list[i],searchpath) # Todo - implement helper function
+        if True: # Todo - implement sucess or failure report - cant find, unsupported file, no file name - continue on failutre - start log file! - helper function - implament checksum?
+            pass 
+        helpers.fileCopy(filePath,destination) # Todo - Implement copy function
+    # Todo - return copy report
 
 def edlDupeDetection(var):
     # Todo

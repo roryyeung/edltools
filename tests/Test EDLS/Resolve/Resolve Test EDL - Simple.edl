@@ -1,0 +1,9 @@
+TITLE: Timeline 1
+FCM: NON-DROP FRAME
+
+001  AX       V     C        00:00:00:00 00:00:04:06 01:00:00:00 01:00:04:06  
+* FROM CLIP NAME: pingout_v2.mov
+
+002  AX       V     C        00:00:00:00 00:00:03:21 01:00:04:06 01:00:08:03  
+* FROM CLIP NAME: text.mov
+

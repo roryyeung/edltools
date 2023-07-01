@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from timecode import Timecode
+import timecode
 import re
 
 def importEdlTitle(filepath):
