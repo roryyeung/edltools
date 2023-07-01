@@ -6,7 +6,9 @@ The reader functions in this package take an EDL (or EDL-like file), and returns
 
 Note that this class assumes a frame rate of 25FPS, unless otherwise specified.
 
-Potential use cases for this package include converting EDLs to Excel, performing file searches for all files contained within an EDL, and providing a bridge between NLE (Non-Linear Editing) software and third-party tools.
+In addition, we have created a similar class for ALEs - a similar avid based format for storage of bin metadata.
+
+Potential use cases for this package include converting EDLs to Excel, performing file searches for all files contained within an EDL/ALE, and providing a bridge between NLE (Non-Linear Editing) software and third-party tools.
 
 ## About EDLs
 

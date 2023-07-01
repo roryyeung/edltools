@@ -75,6 +75,12 @@ class Edl:
     def dumpEffects(self):
         pass
 
+class Ale:
+    """
+    This class stores the data associated with an ALE file, along with methods to manipulate the ALE object.
+    """
+    #Todo
+
 def edlFileSearchCopy(list,searchpath,destination):
     # Todo
     # This function loops across "list" and searches "searchpath" for each file.
