@@ -62,14 +62,16 @@ class Edl:
         for line in self.body:
             source = line.get('SOURCE FILE')
             fileList.append(source)
-        # This checks if the list is empty and raises an error if so.
+        # This checks if the list is empty and raises an error if so. It also removes "None" values.
         count = 0
+        cleanedFileList = []
         for file in fileList:
             if file != None:
+                cleanedFileList.append(file)
                 count += 1
         if count == 0:
             raise ValueError('No source file names found - check these are selected on editing software.')
-        return fileList
+        return cleanedFileList
     
     def dumpEffects(self):
         self.body = helpers.dumpEffects(self.body)

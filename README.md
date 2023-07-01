@@ -4,17 +4,19 @@ This is a simple set of python tools designed to import a range of EDL (Edit Dec
 
 The reader functions in this package take an EDL (or EDL-like file), and returns an object of class EDL. This object contains a range of methods, to allow the data contained to be manipulated or outputted.
 
-Note that this class assumes a frame rate of 25FPS, unless otherwise specified.
-
 In addition, we have created a similar class for ALEs - a similar avid based format for storage of bin metadata.
 
 Potential use cases for this package include converting EDLs to Excel, performing file searches for all files contained within an EDL/ALE, and providing a bridge between NLE (Non-Linear Editing) software and third-party tools.
 
 ## About EDLs
 
-WRITE MORE
+Edit Decision Lists are a way of exporting a timeline from a NLE (Non Linear Editor) into a format which is human readable, or else can be read by an alterntive piece of software.
 
-Edit Decision Lists are a way of exporting 
+AAFs are an extension of this technology, but designed to only be readable by software. It is implemented for Avid Media Composer.
+
+ALEs are a similar technology to AAFs, but are instead intended to carry the contents of a bin.
+
+It is sometimes useful to be able to manipulate EDLs and EDL like files outside of NLE software. For example, to be able to search a network drive for files used by a particular project, or to export files to a spreadsheet to comply with archive contracts.
 
 ## Installation
 
@@ -30,7 +32,7 @@ NOT YET IMPLEMENTED
 
 This package requires the following depencencies:
 
-- Timecode
+- [Timecode](https://github.com/eoyilmaz/timecode)
 
 ## Usage
 
@@ -70,7 +72,7 @@ TODO
 
 #### listFiles
 
-TODO
+This method returns a list, containing the source file names for each clip, as listed in the EDL. If no source file names are present, raises a ValueError.
 
 #### dumpEffects
 
