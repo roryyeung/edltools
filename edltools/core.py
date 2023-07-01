@@ -71,6 +71,9 @@ class Edl:
         if count == 0:
             raise ValueError('No source file names found - check these are selected on editing software.')
         return fileList
+    
+    def dumpEffects(self):
+        pass
 
 def edlFileSearchCopy(list,searchpath,destination):
     # Todo

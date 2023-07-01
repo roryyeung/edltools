@@ -26,24 +26,61 @@ NOT YET IMPLEMENTED
 
 ## Usage
 
-PLACEHOLDER
+### EDL Class
+
+This package contains the EDL class and a set of functions that can use an EDL object.
+
+The object can be created by calling the EDL with a filepath and (optionally) a frame rate.
 
 ```python
-import foobar
+from edltools.core import Edl
 
-# returns 'words'
-foobar.pluralize('word')
+path = "./folder/myEdl.edl"
+frameRate = 30
 
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+newEdl = Edl(path,frameRate)
 ```
 
-## Contributing
+Note that 25FPS is assumed if not otherwise specified.
 
-PLACEHOLDER
+The following methods can be called on the EDL:
+
+#### exportJson
+
+TODO
+
+#### exportExcel
+
+TODO
+
+```python
+```
+
+#### listClips
+
+TODO
+
+#### listFiles
+
+TODO
+
+#### dumpEffects
+
+TODO
+
+### EDL Functions
+
+In addition, several functions have been included, which interact with the ELD object.
+
+#### edlFileSearchCopy
+
+TO DO
+
+#### edlDupeDetection
+
+TO DO
+
+## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
