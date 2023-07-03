@@ -8,6 +8,8 @@ In addition, we have created a similar class for ALEs - a similar avid based for
 
 Potential use cases for this package include converting EDLs to Excel, performing file searches for all files contained within an EDL/ALE, and providing a bridge between NLE (Non-Linear Editing) software and third-party tools.
 
+We hope to eventually add AAF support, [via Mark Reid's PyAAF2 package](https://github.com/markreidvfx/pyaaf2/tree/main).
+
 ## About EDLs
 
 Edit Decision Lists are a way of exporting a timeline from a NLE (Non Linear Editor) into a format which is human readable, or else can be read by an alterntive piece of software.
