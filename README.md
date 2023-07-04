@@ -33,6 +33,7 @@ NOT YET IMPLEMENTED
 This package requires the following depencencies:
 
 - [Timecode](https://github.com/eoyilmaz/timecode)
+- [openpyxl](https://pypi.org/project/openpyxl/)
 
 ## Usage
 

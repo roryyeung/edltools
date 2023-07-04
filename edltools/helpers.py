@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import timecode
 import re
+from openpyxl import Workbook
+from openpyxl.styles import Font
+import os
 
 def importEdlTitle(filepath):
     """Helper function - extracts the title from an File129 formatted EDL and returns a string"""
@@ -60,3 +63,35 @@ def dumpEffects():
     """Helper function - removes all effects (non-clip) lines from the EDL."""
     # Todo
     pass
+
+def importEdlBody(body,path):
+    # See tutorial at https://realpython.com/openpyxl-excel-spreadsheets-python/
+    workbook = Workbook()
+    sheet = workbook.active
+
+
+    sheet["A1"] = "hello"
+    sheet["B1"] = "world!"
+
+    # Set Headers in Excel
+    headers = list(body[0].keys())
+    i=0
+    while i < len(headers):
+        sheet[f"A{ i + 1 }"] = headers[i]
+        sheet[f"A{ i + 1 }"].font = Font(bold=True)
+
+    # Create body in Excel
+    i=0
+    while i < len(body):
+        j=0
+        while j < len(headers):
+            celref = sheet.cell(row=j+1,column = i+2)
+            celref.value = body[i,headers[j]]
+    
+    # Test this a lot!
+
+
+    # Create File Path using OS
+
+    # Save workbook
+    workbook.save(filename="hello_world.xlsx")
