@@ -64,34 +64,40 @@ def dumpEffects():
     # Todo
     pass
 
-def importEdlBody(body,path):
+def exportXls(body,path):
+    """Helper fucntcion - accepts a body object, a output path and an output file name."""
     # See tutorial at https://realpython.com/openpyxl-excel-spreadsheets-python/
     workbook = Workbook()
     sheet = workbook.active
 
-
-    sheet["A1"] = "hello"
-    sheet["B1"] = "world!"
+    # Get the Headers
+    headers = list(body[0].keys())
 
     # Set Headers in Excel
-    headers = list(body[0].keys())
     i=0
     while i < len(headers):
-        sheet[f"A{ i + 1 }"] = headers[i]
-        sheet[f"A{ i + 1 }"].font = Font(bold=True)
+        celref = sheet.cell(row=1,column=i+1)
+        celref.value = headers[i]
+        celref.font = Font(bold=True)
+        i += 1
 
     # Create body in Excel
     i=0
     while i < len(body):
         j=0
         while j < len(headers):
-            celref = sheet.cell(row=j+1,column = i+2)
-            celref.value = body[i,headers[j]]
+            content = str(body[i].get(headers[j]))
+            celref = sheet.cell(row=i+2,column = j+1)
+            celref.value = content
+            j += 1
+        i += 1
     
-    # Test this a lot!
+    # # Test this a lot!
 
 
-    # Create File Path using OS
+    # # Create File Path using OS
+    # joinedPath = os.path.join(path,fileName)
+    # print(joinedPath)
 
     # Save workbook
-    workbook.save(filename="hello_world.xlsx")
+    workbook.save(filename=path)

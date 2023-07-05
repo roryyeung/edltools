@@ -40,9 +40,11 @@ class Edl:
         # Todo
         if effects == False:
             body = helpers.dumpEffects(self.body)
+            # NEED TO ADD HERE FUNCTION TO SIMPIFY CLIP into COLUMNs - otherwise list results
             helpers.exportXls(body,path)
         else:
             body = self.body
+            # NEED TO ADD HERE FUNCTION TO SIMPIFY CLIP into COLUMNs - otherwise list results
             helpers.exportXls(body,path)
         pass
 

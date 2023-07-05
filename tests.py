@@ -1,10 +1,12 @@
 import sys
 sys.path.insert(0, '../edltools')
+import os
 import unittest
 from edltools.core import Edl
-from edltools.helpers import importEdlTitle, importEdlBody, importEdlFcm
+from edltools.helpers import importEdlTitle, importEdlBody, importEdlFcm, exportXls
+from openpyxl import load_workbook
 
-class ImportEDL(unittest.TestCase):
+class ImportEdlTests(unittest.TestCase):
 
     def test_import_simple_Avid_Edl(self):
         """Checks that it's able to generate an EDL object from an Avid File129 type EDL."""
@@ -94,6 +96,21 @@ class HelpersTests(unittest.TestCase):
         Fcm = importEdlFcm(path)
         self.assertEqual(Fcm,expectedFcm, "Error reading Fcm - error with helper function: importEdlFcm")
         
+class XlsHelpersTests(unittest.TestCase):
+
+    def test_savesExcel(self):
+        """Checks that the helper method saves a generic body object to an xlsx file correctly."""
+        testPath="./Test Exports/savesExcel.xlsx"
+        # Cleans up any existing test files
+        if os.path.exists("./Test Exports/savesExcel.xlsx"):
+            os.remove("./Test Exports/savesExcel.xlsx")
+        # Write test file
+        body = [{'Key1':'Val1','Key2':'Val2'},{'Key1':'Val3','Key2':'Val4'}]
+        exportXls(body,testPath)
+        # Load and check test file
+        workbook = load_workbook(filename = testPath)
+        sheet = workbook.active
+        self.assertEqual(sheet['B2'].value,"Val2")
 
 if __name__ == '__main__':
     unittest.main()
