@@ -127,5 +127,6 @@ SOFTWARE.
 ## See Also
 
 - [Edl Composer](https://github.com/pietrop/edl-composer) - A Node.js package to create EDLs from objects.
+- [Edl to Cdl](https://github.com/walter-arrighetti/edl2cdl/tree/master) - A python project to extract CDL invormation from Edls.
 - [Edl Kit](https://github.com/Red5d/edlkit) - A python project to create a video edit using an EDL on Linux.
 
