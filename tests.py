@@ -22,23 +22,28 @@ class ImportEdlTests(unittest.TestCase):
         expectedString = "EDL object - Title: Timeline 1, Frame Rate: 25, Length: 2 lines."
         self.assertEqual(edlObject.__str__(),expectedString, "Error generating EDL Object from Resolve")
 
-class MethodsTests(unittest.TestCase):
+class EdlMethodsTests(unittest.TestCase):
 
-    def test_listFiles(self):
+    def test_EdlListFiles(self):
         """Checks that an EDL provides the expected list of source files"""
         edlPath = "./Test EDLS/Avid/Avid Test EDL - Simple_WITH_Source.edl"
         edlObject = Edl(edlPath)
         expectedList = ['AU603_SHARKS_WITH_STEVE_BACKSHALL_3_PACIFIC_178FF_TXM_UHD_EN-GB','AU603_SHARKS_WITH_STEVE_BACKSHALL_3_PACIFIC_178FF_TXM_UHD_EN-GB','AU603_SHARKS_WITH_STEVE_BACKSHALL_3_PACIFIC_178FF_TXM_UHD_EN-GB','AU603_SHARKS_WITH_STEVE_BACKSHALL_3_PACIFIC_178FF_TXM_UHD_EN-GB','AU603_SHARKS_WITH_STEVE_BACKSHALL_3_PACIFIC_178FF_TXM_UHD_EN-GB','AU603_SHARKS_WITH_STEVE_BACKSHALL_3_PACIFIC_178FF_TXM_UHD_EN-GB','AU603_SHARKS_WITH_STEVE_BACKSHALL_3_PACIFIC_178FF_TXM_UHD_EN-GB','AU603_SHARKS_WITH_STEVE_BACKSHALL_3_PACIFIC_178FF_TXM_UHD_EN-GB','AU603_SHARKS_WITH_STEVE_BACKSHALL_3_PACIFIC_178FF_TXM_UHD_EN-GB','AU603_SHARKS_WITH_STEVE_BACKSHALL_3_PACIFIC_178FF_TXM_UHD_EN-GB']
         self.assertEqual(edlObject.listFiles(),expectedList,"Error with listFiles method - not expected list of files")
 
-    def test_listFiles_Nonetype(self):
+    def test_EdlListFiles_Nonetype(self):
         """Checks that if an EDL provides no source files, that an error is raised"""
         edlPath="./Test EDLS/Avid/Avid Test EDL - Simple.edl"
         edlObject = Edl(edlPath)
         with self.assertRaises(ValueError): edlObject.listFiles()
 
-
-
+class ALEMethodsTests(unittest.TestCase):
+    
+    def test_AleListFiles(self):
+        pass
+    
+    def test_AleListFiles_Nonetype(self):
+        pass
 
 class HelpersTests(unittest.TestCase):
     
