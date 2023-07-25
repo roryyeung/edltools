@@ -182,6 +182,12 @@ def edlDupeDetection(projectEdl,sourceEdl):
     - sourceEld: an EDL object or list of EDL objects.
     Returns a list of clip names
     """
+    reusedClips = []
+    if sourceEdl is list:
+        pass
+    else:
+        pass
+    return reusedClips
     # Todo
     # Takes an arbitary number of EDLs, and lists any files used more than once.
     # Could also run in clip name mode as a secondary function?
