@@ -26,11 +26,11 @@ class Edl:
     
     def __str__(self):
         '''Returns string of the object'''
-        return f'EDL object - Title: {self.title}, Frame Rate: {str(self.frameRate)}, Length: {self.length} lines.'
+        return f"EDL object - Title: {self.title}, Frame Rate: {str(self.frameRate)}, Length: {self.length} lines."
 
     def __repr__(self):
         '''Returns representation of the object'''
-        return f'EDL(title={self.title},frameRate={self.frameRate},length={self.length})'
+        return f"EDL(title={self.title},frameRate={self.frameRate},length={self.length})"
 
     def exportJson(self,path):
         # Todo
@@ -54,8 +54,21 @@ class Edl:
         It ignores all effects and other non-clip items.
         It will raise a valueError should no clip names be found.
         """
-        # Todo
-        pass
+# =============== NOT YET WORKING ==================================================================================
+        clipList = []
+        for line in self.body:
+            source = line.get('FROM CLIP NAME')
+            clipList.append(source)
+        # This checks if the list is empty and raises an error if so. It also removes "None" values.
+        count = 0
+        cleanedClipList = []
+        for clip in clipList:
+            if clip != None:
+                cleanedClipList.append(clip)
+                count += 1
+        if count == 0:
+            raise ValueError('No source clip names found - check these are selected on editing software.')
+        return cleanedClipList
 
     def listFiles(self):
         """
@@ -174,19 +187,26 @@ def edlFileSearchCopy(object,searchpath,destination,copy=False):
             fp.write(address)
     print(f"Report complete - at path {destination}.")
 
-def edlDupeDetection(projectEdl,sourceEdl):
+def edlDupeDetection(projectEdl,sourceEdl,fileMode=False):
     """
-    Compares a  projectEDL against one or more sourceEDL (s) and lists any files used in both the 
+    Compares a  projectEDL against one or more sourceEDL (s) and lists any clips used in both the 
     Accepts:
     - projectEdl: an EDL object
     - sourceEld: an EDL object or list of EDL objects.
     Returns a list of clip names
+    Accepts flag: fileMode = False - checks for files insead of clips # NOT DONE YET ==================
     """
     reusedClips = []
-    if sourceEdl is list:
-        pass
+    clipsList = projectEdl.listClips()
+    if type(sourceEdl) is list:
+        for Edl in sourceEdl:
+            for projectClip in clipsList:
+                if projectClip in Edl.listClips():
+                    reusedClips.append(projectClip)
     else:
-        pass
+        for projectClip in clipsList:
+            if projectClip in sourceEdl.listClips():
+                reusedClips.append(projectClip)
     return reusedClips
     # Todo
     # Takes an arbitary number of EDLs, and lists any files used more than once.
