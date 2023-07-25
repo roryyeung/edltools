@@ -32,5 +32,5 @@ sourcePath2 = "TTN_Working/230714_TTN_Whale with Steve Backshall_Ep2_Ocean Hunte
 
 projectEdl = Edl(projectPath)
 sourceEdl = [Edl(sourcePath1),Edl(sourcePath2)]
-reused = edlDupeDetection(projectEdl,sourceEdl)
+reused = edlDupeDetection(projectEdl,sourceEdl,ignoreAudio=True)
 print(set(reused))

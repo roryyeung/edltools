@@ -187,14 +187,16 @@ def edlFileSearchCopy(object,searchpath,destination,copy=False):
             fp.write(address)
     print(f"Report complete - at path {destination}.")
 
-def edlDupeDetection(projectEdl,sourceEdl,fileMode=False):
+def edlDupeDetection(projectEdl,sourceEdl,fileMode=False,ignoreAudio=False):
+    # TODO - WRITE TESTS ===================================================================
     """
     Compares a  projectEDL against one or more sourceEDL (s) and lists any clips used in both the 
     Accepts:
     - projectEdl: an EDL object
     - sourceEld: an EDL object or list of EDL objects.
     Returns a list of clip names
-    Accepts flag: fileMode = False - checks for files insead of clips # NOT DONE YET ==================
+    Accepts flag: fileMode = False - checks for files insead of clips # TODO - NOT DONE YET ==================
+    Accepts flag: ignoreAudio = False - removes any clip ending in an audio format
     """
     reusedClips = []
     clipsList = projectEdl.listClips()
@@ -207,11 +209,12 @@ def edlDupeDetection(projectEdl,sourceEdl,fileMode=False):
         for projectClip in clipsList:
             if projectClip in sourceEdl.listClips():
                 reusedClips.append(projectClip)
+    if ignoreAudio == True:
+        reusedClipsNoAudio = []
+        for clip in reusedClips:
+            if ("WAV" in clip) or (".AIFF" in clip):
+                continue
+            else:
+                reusedClipsNoAudio.append(clip)
+        reusedClips = reusedClipsNoAudio
     return reusedClips
-    # Todo
-    # Takes an arbitary number of EDLs, and lists any files used more than once.
-    # Could also run in clip name mode as a secondary function?
-    # Works by creating two lists. Every time it sees a file, it adds it to the first list. If it sees it a second time, adds it to the second list.
-    # Use set to avoid using more than once?
-    # Create some kind of comparison object - that also stores where the dupes are used?
-    pass
