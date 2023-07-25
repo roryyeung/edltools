@@ -174,7 +174,14 @@ def edlFileSearchCopy(object,searchpath,destination,copy=False):
             fp.write(address)
     print(f"Report complete - at path {destination}.")
 
-def edlDupeDetection(var):
+def edlDupeDetection(projectEdl,sourceEdl):
+    """
+    Compares a  projectEDL against one or more sourceEDL (s) and lists any files used in both the 
+    Accepts:
+    - projectEdl: an EDL object
+    - sourceEld: an EDL object or list of EDL objects.
+    Returns a list of clip names
+    """
     # Todo
     # Takes an arbitary number of EDLs, and lists any files used more than once.
     # Could also run in clip name mode as a secondary function?
